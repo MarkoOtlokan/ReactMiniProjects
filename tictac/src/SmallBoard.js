@@ -7,12 +7,13 @@ export default class SmallBoard extends React.Component {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
+      color:"",
       xIsNext: true,    };
   }
 
   Square(props) {
     return (
-      <button className="square" onClick={props.onClick}>
+      <button  className={props.color} onClick={props.onClick}>
         {props.value}
       </button>
     );
@@ -20,23 +21,26 @@ export default class SmallBoard extends React.Component {
 
   handleClick(i) {
     const squares = this.state.squares.slice();
-    if (this.calculateWinner(squares) || squares[i]) {
+    if(squares[i])
       return;
-    }
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({      squares: squares,      xIsNext: !this.state.xIsNext,    });
+    if (this.calculateWinner(squares, squares[i]) || squares[i]) {
+      return;
+    }
   }
 
   renderSquare(i) {
     return (
       <this.Square
         value={this.state.squares[i]}
+        color={this.state.color}
         onClick={() => this.handleClick(i)}
       />
     );
   }
 
-  calculateWinner(squares) {
+  calculateWinner(squares,xoro) {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -50,7 +54,15 @@ export default class SmallBoard extends React.Component {
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      if(xoro === 'X'){
+        console.log(xoro);
+        this.setState({color: "buttonWiner1"});
+      }
+      else{
+        console.log("drugi"+xoro)
+        this.setState({color: "buttonWiner2"});
+      }
+      this.render();
     }
   }
   return null;

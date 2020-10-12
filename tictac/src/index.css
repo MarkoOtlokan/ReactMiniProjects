@@ -29,7 +29,7 @@ ol, ul {
   margin-bottom: 10px;
 }
 
-.square {
+button {
   background: #fff;
   border: 1px solid #999;
   float: left;
@@ -44,6 +44,14 @@ ol, ul {
   width: 34px;
 }
 
+.buttonWiner1{
+  background: #0fff00;
+}
+
+.buttonWiner2{
+  background: #ff0000;
+}
+
 .square:focus {
   outline: none;
 }
@@ -55,6 +63,9 @@ ol, ul {
 .game {
   display: flex;
   flex-direction: row;
+  margin: auto;
+  width: 50%;
+   padding: 10px;
 }
 
 .game-info {
