@@ -14,22 +14,22 @@ class Game extends React.Component {
       over:false,   };
     this.child = React.createRef();
     this.handleClickBoard = this.handleClickBoard.bind(this);
+    this.handleFinish = this.handleFinish.bind(this);
   }
 
   handleFinish(i) {
     const squares = this.state.squares.slice();
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     console.log("gotova igra broj " + i);
-    this.setState({      squares: squares,      xIsNext: !this.state.xIsNext,    });
+    this.setState({squares: squares, xIsNext: !this.state.xIsNext});
     if (this.calculateWinner(squares, squares[i]) || squares[i] || this.state.over) {
       return;
     }
   }
 
   handleClickBoard(i){
+    console.log("i ja sam pozvan");
     this.setState({xIsNext: !this.state.xIsNext});
-    console.log(this.state.xIsNext);
-    this.render();
   }
 
   calculateWinner(squares, xoro) {
@@ -56,7 +56,6 @@ class Game extends React.Component {
           this.setState({color: "2"});
         }
         this.setState({over:true});
-        this.render();
       }
       else{
         console.log("jos nema pobednika");
@@ -74,7 +73,7 @@ class Game extends React.Component {
         <SmallBoard
           value = {this.state.squares[i]}
           color={this.state.color}
-          onFinish={(i) => this.handleFinish}
+          onFinish={this.handleFinish}
           number = {i}
           onClickBoard = {this.handleClickBoard}
           next = {sledeca}
@@ -84,14 +83,7 @@ class Game extends React.Component {
   }
 
   render() {
-    const winner = this.calculateWinner(this.state.squares);
-    let status;
-    if (winner) {
-       status = 'Winner: ' + winner;
-    }
-    else {
-       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
-    }
+    var status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     var name = "board"+this.state.color;
     return (
       <div>

@@ -72,7 +72,6 @@ export default class SmallBoard extends React.Component {
       this.setState({over:true});
       console.log("sada cu metod da pozovem " + this.props.number);
       this.props.onFinish(this.props.number);
-      this.render();
       return true;
     }
   }
