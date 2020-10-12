@@ -33,12 +33,15 @@ export default class SmallBoard extends React.Component {
   }
 
   renderSquare(i) {
+    var name = "subsection section" + (i+1);
     return (
-      <this.Square
-        value={this.state.squares[i]}
-        color={this.state.color}
-        onClick={() => this.handleClick(i)}
-      />
+      <div  className={name}>
+        <this.Square
+          value={this.state.squares[i]}
+          color={this.state.color}
+          onClick={() => this.handleClick(i)}
+        />
+      </div>
     );
   }
 
@@ -72,24 +75,19 @@ export default class SmallBoard extends React.Component {
 }
 
   render() {
+    var name = "section section"+this.props.number;
     return (
-      <span className="smallBoard">
-        <div className="board-row">
+      <div class={name}>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
           {this.renderSquare(3)}
           {this.renderSquare(4)}
           {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
-        </div>
-      </span>
+      </div>
     );
   }
 }

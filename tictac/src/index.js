@@ -9,7 +9,9 @@ class Game extends React.Component {
     super(props);
     this.state = {
       squares: Array(9).fill(null),
-      xIsNext: true,    };
+      color:"",
+      xIsNext: true,
+      over:false,   };
   }
 
   calculateWinner(squares) {
@@ -34,13 +36,12 @@ class Game extends React.Component {
 
   renderSquare(i) {
     return (
-      <div  className="row">
         <SmallBoard
           value = {this.state.squares[i]}
           color={this.state.color}
           onClick={() => this.handleClick(i)}
+          number = {i}
         />
-      </div>
     );
   }
 
@@ -54,48 +55,24 @@ class Game extends React.Component {
        status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
     return (
-      <div className="game">
-
       <div>
-        <div className="rows">
-          <div  className="row">
-            <SmallBoard />
-          </div>
-          <div  className="row">
-            <SmallBoard />
-          </div>
-          <div className="row">
-            <SmallBoard />
-          </div>
-        </div>
-        <div className=".board-row">
-          <div  className="row">
-            <SmallBoard />
-          </div>
-          <div  className="row">
-            <SmallBoard />
-          </div>
-          <div className="row">
-            <SmallBoard />
-          </div>
-        </div>
-        <div className=".board-row">
-          <div  className="row">
-            <SmallBoard />
-          </div>
-          <div  className="row">
-            <SmallBoard />
-          </div>
-          <div className="row">
-            <SmallBoard />
-          </div>
-        </div>
+
+      <div className="board">
+              {this.renderSquare(1)}
+              {this.renderSquare(2)}
+              {this.renderSquare(3)}
+              {this.renderSquare(4)}
+              {this.renderSquare(5)}
+              {this.renderSquare(6)}
+              {this.renderSquare(7)}
+              {this.renderSquare(8)}
+              {this.renderSquare(9)}
       </div>
-        <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
-        </div>
+      <div className="game-info">
+        <div>{status}</div>
+        <ol>{/* TODO */}</ol>
       </div>
+    </div>
     );
   }
 }
