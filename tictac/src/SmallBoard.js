@@ -8,7 +8,9 @@ export default class SmallBoard extends React.Component {
     this.state = {
       squares: Array(9).fill(null),
       color:"",
-      xIsNext: true,    };
+      xIsNext: true,
+      over:false,
+      };
   }
 
   Square(props) {
@@ -25,7 +27,7 @@ export default class SmallBoard extends React.Component {
       return;
     squares[i] = this.state.xIsNext ? 'X' : 'O';
     this.setState({      squares: squares,      xIsNext: !this.state.xIsNext,    });
-    if (this.calculateWinner(squares, squares[i]) || squares[i]) {
+    if (this.calculateWinner(squares, squares[i]) || squares[i] || this.state.over) {
       return;
     }
   }
@@ -53,7 +55,7 @@ export default class SmallBoard extends React.Component {
   ];
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c] && !this.state.over) {
       if(xoro === 'X'){
         console.log(xoro);
         this.setState({color: "buttonWiner1"});
@@ -62,6 +64,7 @@ export default class SmallBoard extends React.Component {
         console.log("drugi"+xoro)
         this.setState({color: "buttonWiner2"});
       }
+      this.setState({over:true});
       this.render();
     }
   }
