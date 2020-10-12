@@ -8,8 +8,8 @@ export default class SmallBoard extends React.Component {
     this.state = {
       squares: Array(9).fill(null),
       color:"",
-      xIsNext: true,
       over:false,
+      moves: 8, //moves remaining
       };
   }
 
@@ -22,11 +22,13 @@ export default class SmallBoard extends React.Component {
   }
 
   handleClick(i) {
+    this.props.onClickBoard(i);
     const squares = this.state.squares.slice();
+    console.log(this.props);
     if(squares[i])
       return;
-    squares[i] = this.state.xIsNext ? 'X' : 'O';
-    this.setState({      squares: squares,      xIsNext: !this.state.xIsNext,    });
+    squares[i] = this.props.next;
+    this.setState({squares: squares});
     if (this.calculateWinner(squares, squares[i]) || squares[i] || this.state.over) {
       return;
     }
@@ -68,8 +70,16 @@ export default class SmallBoard extends React.Component {
         this.setState({color: "buttonWiner2"});
       }
       this.setState({over:true});
+      console.log("sada cu metod da pozovem " + this.props.number);
+      this.props.onFinish(this.props.number);
       this.render();
+      return true;
     }
+  }
+  this.setState({moves: this.state.moves-1});
+  if(this.state.moves <= 0){
+    console.log("draw");
+    this.setState({color: "buttonDraw"});
   }
   return null;
 }
@@ -77,7 +87,7 @@ export default class SmallBoard extends React.Component {
   render() {
     var name = "section section"+this.props.number;
     return (
-      <div class={name}>
+      <div className={name}>
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}

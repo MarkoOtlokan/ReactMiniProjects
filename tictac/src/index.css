@@ -23,9 +23,22 @@ button {
   background: #0fff00;
 }
 
+#id1{
+  background: #0fff00;
+}
+
 .buttonWiner2{
   background: #ff0000;
 }
+
+#id2{
+  background: #ff0000;
+}
+
+.buttonDraw{
+  background: #878787;
+}
+
 
 .square:focus {
   outline: none;
@@ -39,6 +52,32 @@ button {
   width: 600px;
   height: 600px;
   margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.board1{
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  background: #0fff00;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.board2{
+  width: 600px;
+  height: 600px;
+  margin: 0 auto;
+  background: #ff0000;
 
   display: grid;
   grid-template-columns: repeat(3, 1fr);
